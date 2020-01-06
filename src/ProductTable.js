@@ -14,23 +14,22 @@ class ProductTable extends React.Component {
 
         const rows = [];
         if (product.length > 0) {
+            rows.push(<ProductCategoryRow category={product[0].category} />);
+            rows.push(<ProductRow name={product[0].name} price={product[0].price} />)
 
-            rows.push(
-                <tbody>
-                    <ProductCategoryRow category={product[0].category} />
-
-                    <ProductRow name={product[0].name} price={product[0].price} />
-                </tbody>
-            )
             for (let i = 0; i < product.length - 1; i++) {
-                rows.push(
-                    <tbody>
-                        {((i + 1 !== product.length) && (product[i].category != product[i + 1].category)) &&
-                            <ProductCategoryRow category={product[i + 1].category} />
-                        }
-                        <ProductRow name={product[i + 1].name} price={product[i + 1].price} />
-                    </tbody>
-                )
+                {((i + 1 !== product.length) && (product[i].category != product[i + 1].category)) &&
+                    rows.push(<ProductCategoryRow category={product[i + 1].category} />)
+                }
+                rows.push(<ProductRow name={product[i + 1].name} price={product[i + 1].price} />)
+            }
+        }
+
+        let search = 'Football';
+        for(let i=0; i<rows.length; i++) {
+            // console.log(rows[i].props);
+            if(search === rows[i].props.name) {
+                console.log(rows[i].props)
             }
         }
 
@@ -43,9 +42,9 @@ class ProductTable extends React.Component {
                             <td><strong>Price</strong></td>
                         </tr>
                     </thead>
-                    {/* <tbody> */}
-                    {rows}
-                    {/* </tbody> */}
+                    <tbody>
+                        {rows}
+                    </tbody>
                 </table>
             </div>
         );
