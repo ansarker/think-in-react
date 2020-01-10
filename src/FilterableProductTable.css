@@ -1,3 +1,15 @@
+* {
+  background: #283437;
+  color: #fff;
+}
+
 .container {
   padding: 10px;
+}
+
+input[type="text"] {
+  border: 1px solid #eee;
+  padding: 3px;
+  outline: none;
+  color: white;
 }

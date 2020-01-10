@@ -5,33 +5,46 @@ import ProductRow from './ProductRow';
 
 class ProductTable extends React.Component {
     render() {
-        const product = this.props.product;
-        // const category = [];
+        let lastCategory = null;
+        const rows = [];
 
-        // for(let i=0; i<product.length; i++) {
-        //     category.push(product[i].category)
+        const filterText = this.props.filterText.toLowerCase();
+        const inStockOnly = this.props.inStockOnly;
+        
+        // METHOD: Too old
+        // const products = this.props.products;
+        // if (products.length > 0) {
+        //     rows.push(<ProductCategoryRow category={products[0].category} stocked={products[0].stocked}/>);
+        //     rows.push(<ProductRow name={products[0].name} price={products[0].price} stocked={products[0].stocked} />)
+
+        //     for (let i = 0; i < products.length - 1; i++) {
+        //         {((i + 1 !== products.length) && (products[i].category !== products[i + 1].category)) &&
+        //             rows.push(<ProductCategoryRow category={products[i + 1].category} stocked={products[i + 1].stocked}/>)
+        //         }
+        //         rows.push(<ProductRow name={products[i + 1].name} price={products[i + 1].price} stocked={products[i + 1].stocked}/>)
+        //     }
         // }
 
-        const rows = [];
-        if (product.length > 0) {
-            rows.push(<ProductCategoryRow category={product[0].category} />);
-            rows.push(<ProductRow name={product[0].name} price={product[0].price} />)
 
-            for (let i = 0; i < product.length - 1; i++) {
-                {((i + 1 !== product.length) && (product[i].category != product[i + 1].category)) &&
-                    rows.push(<ProductCategoryRow category={product[i + 1].category} />)
+        // METHOD: Efficient way
+        let i = 0;
+        this.props.products.forEach(product => {
+            if (product.name.toLowerCase().match(filterText)) {
+
+                if(product.category !== lastCategory) {
+                    rows.push(<ProductCategoryRow category={product.category} key={product.name}/>)
                 }
-                rows.push(<ProductRow name={product[i + 1].name} price={product[i + 1].price} />)
+                
+                if (inStockOnly && product.stocked) {
+                    rows.push(<ProductRow product={product} key={i.toString()} />)
+                } else if (!inStockOnly) {
+                    rows.push(<ProductRow product={product} key={i.toString()} />)
+                }
+                
+                lastCategory = product.category;
             }
-        }
-
-        let search = 'Football';
-        for(let i=0; i<rows.length; i++) {
-            // console.log(rows[i].props);
-            if(search === rows[i].props.name) {
-                console.log(rows[i].props)
-            }
-        }
+            i++;
+        });
 
         return (
             <div>

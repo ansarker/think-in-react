@@ -5,23 +5,19 @@ import FilterableProductTable from './FilterableProductTable';
 import * as serviceWorker from './serviceWorker';
 
 
-const product = [
+const PRODUCTS = [
    {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
     {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
     {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
     {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
     {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
     {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"},
-    {category: "Fruits", price: "$99.99", stocked: false, name: "Orange"},
-    {category: "Fruits", price: "$89.99", stocked: true, name: "Boroi"}
+    {category: "Fruits", price: "$7.99", stocked: false, name: "Orange"},
+    {category: "Fruits", price: "$9.99", stocked: true, name: "Zuzube"},
+    {category: "Fruits", price: "$6.99", stocked: true, name: "Apple"},
+    {category: "Fruits", price: "$10.99", stocked: true, name: "Mango"},
 ];
 
-// const product= [
-//     {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
-//     {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
-//     {category: "Fruits", price: "$99.99", stocked: false, name: "Orange"},
-     
-// ]
-ReactDOM.render(<FilterableProductTable product={product} />, document.getElementById('root'));
+ReactDOM.render(<FilterableProductTable products={PRODUCTS} />, document.getElementById('root'));
 
 serviceWorker.unregister();
